@@ -1,18 +1,35 @@
 import { NgModule } from '@angular/core';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './shared/pages/home-page/home-page.component';
 import { AboutPageComponent } from './shared/pages/aboutPage/aboutPage.component';
+import { ContactPageComponent } from './shared/pages/contact-page/contact-page.component';
 
 const routes: Routes = [
-  {
-    path: 'home',
-    component: HomePageComponent,
-  },
+  // {
+  //   path: '',
+  //   component: HomePageComponent,
+  // },
   {
     path: 'about',
     component: AboutPageComponent,
   },
+  {
+    path: 'contact',
+    component: ContactPageComponent,
+  },
+  {
+    path: 'countries',
+    loadChildren: () =>
+      import('./countries/countries.module').then((m) => m.CountriesModule),
+  },
+  {
+    path: '**',
+    redirectTo: 'countries',
+  },
 ];
 
-@NgModule({})
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
 export class AppRountingModule {}
